@@ -1,0 +1,8 @@
+#sketchGrid {
+    display: flexbox;
+}
+
+.squareCont {
+    height: 100px;
+    width: 100px;
+}
