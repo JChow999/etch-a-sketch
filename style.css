@@ -1,7 +1,16 @@
+
+
 #sketchGrid {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     user-select: none;
+    border-style: solid;
+    border-width: 1px;
+    width: 50%;
+    height: auto;
+    margin: 10%;
+    padding: 0px;
 }
 
 .gridColumn {
