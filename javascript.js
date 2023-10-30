@@ -45,10 +45,16 @@ function changeColour(e) {
 }
 
 
-createGrid(DEFAULT_SIZE);
-
 gridChange.addEventListener('click', () => {
-    let userInput = prompt("Please enter an integer of 2-100 to generate your grid.", "16");
-    deleteGrid()
-    createGrid(userInput)
+    let userInput = prompt("Please enter an integer of 1-100 to generate your grid.", "16");
+    if (userInput == null) {
+        return
+    } else if (1 <= userInput && userInput <= 100) {
+        deleteGrid();
+        createGrid(userInput);
+    } else {
+        alert("Error: Please enter an integer within 1-100")
+    }
 });
+
+createGrid(DEFAULT_SIZE);
