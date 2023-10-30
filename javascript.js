@@ -9,17 +9,6 @@ let currentSize = 16
 
 let colourMode = 'black';
 let currentColour = 'black';
-let colourList = {
-    black: 'rgb(0 ,0 ,0)',
-    white: 'rgb(255, 255, 255)',
-    red: 'rgb(255, 0, 0)',
-    orange: 'rgb(255, 128, 0)',
-    yellow: 'rgb(255, 255, 0)',
-    green: 'rgb(0, 255, 0)',
-    blue: 'rgb(0, 0, 255)',
-    indigo: 'rgb(0, 255, 255)',
-    violet: 'rgb(127, 0, 255)',
-}
 
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
@@ -48,20 +37,25 @@ function createGrid(gridSize) {
     }
 }
 
+function randomCode() {
+    num = Math.floor(Math.random() * 255)
+    return num
+}
+
+// Function causes div/square to change colour of the div based on the selected colour mode 
 function changeColour(e) {
     if (e.type === 'mouseover' && !mouseDown) {
         return
     } else if (colourMode == 'black') {
-        e.target.style.backgroundColor = colourList.black;
-    } else if (colourMode == 'rainbow') {
-
-        return
+        e.target.style.backgroundColor = 'rgb(0, 0, 0)';
+    } else if (colourMode == 'random') {
+        e.target.style.backgroundColor = `rgb(${randomCode()}, ${randomCode()}, ${randomCode()})`;
     } else if (colourMode == 'eraser') {
         e.target.style.backgroundColor = 'rgb(255, 255, 255)';
     }
 }
 
-
+// User can enter an integer to create a new grid with width and height based on input
 gridChange.addEventListener('click', () => {
     let userInput = prompt("Please enter an integer of 1-100 to generate your grid.", "16");
     if (userInput == null) {
@@ -75,6 +69,7 @@ gridChange.addEventListener('click', () => {
     }
 });
 
+// User can press reset button to change all the divs to have the colour white
 resetBtn.addEventListener('click', () => {
     let allDivs = document.getElementsByClassName('squareCont');
     for (div in allDivs) {
@@ -92,7 +87,7 @@ eraseBtn.addEventListener('click', () => {
 });
 
 rainbowBtn.addEventListener('click', () => {
-    colourMode = 'rainbow';
+    colourMode = 'random';
 })
 
 createGrid(currentSize);
