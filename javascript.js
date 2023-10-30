@@ -1,21 +1,30 @@
-const DEFAULT_SIZE = 16;
+const body = document.querySelector('body');
+const sketchGrid = document.querySelector('#sketchGrid');
+const gridChange = document.querySelector('#gridChangeBtn');
+const resetBtn = document.querySelector('#resetBtn');
+const eraseBtn = document.querySelector('#eraseBtn');
+const rainbowBtn = document.querySelector('#rainbowBtn');
 
-const body = document.querySelector('body')
-const sketchGrid = document.querySelector('#sketchGrid')
-const gridChange = document.querySelector('#gridChangeBtn')
+let currentSize = 16
 
-var mouseDown = false;
+let colourMode = 'black';
+let currentColour = 'black';
+let colourList = {
+    black: 'rgb(0 ,0 ,0)',
+    white: 'rgb(255, 255, 255)',
+    red: 'rgb(255, 0, 0)',
+    orange: 'rgb(255, 128, 0)',
+    yellow: 'rgb(255, 255, 0)',
+    green: 'rgb(0, 255, 0)',
+    blue: 'rgb(0, 0, 255)',
+    indigo: 'rgb(0, 255, 255)',
+    violet: 'rgb(127, 0, 255)',
+}
+
+let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-
-function blackColor() {
-    return (0,0,0);
-}
-
-function rainbowColor() {
-    return
-}
 
 function deleteGrid() {
     sketchGrid.innerHTML = ""
@@ -40,8 +49,16 @@ function createGrid(gridSize) {
 }
 
 function changeColour(e) {
-    if (e.type === 'mouseover' && !mouseDown) return
-    e.target.style.backgroundColor = 'black';
+    if (e.type === 'mouseover' && !mouseDown) {
+        return
+    } else if (colourMode == 'black') {
+        e.target.style.backgroundColor = colourList.black;
+    } else if (colourMode == 'rainbow') {
+
+        return
+    } else if (colourMode == 'eraser') {
+        e.target.style.backgroundColor = 'rgb(255, 255, 255)';
+    }
 }
 
 
@@ -50,11 +67,32 @@ gridChange.addEventListener('click', () => {
     if (userInput == null) {
         return
     } else if (1 <= userInput && userInput <= 100) {
+        currentSize = userInput;
         deleteGrid();
-        createGrid(userInput);
+        createGrid(currentSize);
     } else {
         alert("Error: Please enter an integer within 1-100")
     }
 });
 
-createGrid(DEFAULT_SIZE);
+resetBtn.addEventListener('click', () => {
+    let allDivs = document.getElementsByClassName('squareCont');
+    for (div in allDivs) {
+        console.log(allDivs[div]);
+        allDivs[div].style.backgroundColor = 'white';
+    }
+});
+
+eraseBtn.addEventListener('click', () => {
+    if (colourMode == 'black') {
+        colourMode = 'eraser'
+    } else {
+        colourMode = 'black'
+    }    
+});
+
+rainbowBtn.addEventListener('click', () => {
+    colourMode = 'rainbow';
+})
+
+createGrid(currentSize);
