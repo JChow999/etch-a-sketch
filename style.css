@@ -1,29 +1,44 @@
+#buttonContainer {
+    display: flex;
+    background-color: beige;
+}
 
+#gridContainer {
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 10px;
+}
 
 #sketchGrid {
     display: flex;
+    flex: 1;
+    overflow: auto;
     flex-direction: row;
     justify-content: center;
     user-select: none;
     border-style: solid;
     border-width: 1px;
-    width: 50%;
-    height: auto;
-    margin: 10%;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 20px;
     padding: 0px;
 }
 
 .gridColumn {
     display: flex;
+    flex: 1;
     flex-direction: column;
     user-select: none;
 }
 
 .squareCont {
-    border-style: solid;
-    border-width: 1px;
-    height: 10px;
-    width: 10px;
+    background-color: white;
+    flex: 1;
+    min-height: 1px;
+    min-width: 1px;
     user-select: none;
 }
 
